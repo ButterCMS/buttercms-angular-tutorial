@@ -1,0 +1,27 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins/breakpoints";
+
+$topbar-padding-top: 15px;
+$topbar-padding-right: 20px;
+ul {
+  list-style: none;
+}
+li {
+  display: inline;
+  align-items: right;
+  font-size: 12px;
+  cursor: pointer;
+  &::after {
+    content: '|';
+    padding: 5px;
+  }
+  &:last-child::after {
+    content : '';
+  }
+}
+
+.equal_column {
+    display: flex;
+    justify-content: space-between;
+}
