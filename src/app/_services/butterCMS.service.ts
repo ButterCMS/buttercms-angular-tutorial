@@ -3,17 +3,23 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {map} from 'rxjs/operators';
 import {Paging} from '../_models';
+import {of} from 'rxjs/observable/of';
 
 @Injectable()
 export class ButterCMSService {
   private static baseURL = 'https://api.buttercms.com/';
   private api_token = '321478403e868f0fc41f0115731f330ff720ce0b';
-
+  // private api_token = 'your_api_token';
+  private okToCallApi = false;
 
   constructor(private http: HttpClient) {
+    this.okToCallApi = !(!this.api_token || this.api_token === 'your_api_token');
   }
 
   customers(): Observable<{ meta: any, data: any[] }> {
+    if (!this.okToCallApi) {
+      return of(null);
+    }
     return this.http.get<Paging>(ButterCMSService.baseURL + 'v2/pages/customer_case_study/',
       {params: this.getListingParams()})
       .pipe(
@@ -26,6 +32,9 @@ export class ButterCMSService {
   }
 
   customer(slug: string): Observable<{ data: any }> {
+    if (!this.okToCallApi) {
+      return of(null);
+    }
     if (!slug) {
       slug = '';
     }
@@ -38,6 +47,9 @@ export class ButterCMSService {
   }
 
   faq(): Observable<{ data: any }> {
+    if (!this.okToCallApi) {
+      return of(null);
+    }
     return this.http.get<{ data }>(ButterCMSService.baseURL + `v2/content`,
       {params: this.getFaqParams()})
       .pipe(
@@ -47,6 +59,9 @@ export class ButterCMSService {
   }
 
   blogPosts(): Observable<Paging> {
+    if (!this.okToCallApi) {
+      return of(null);
+    }
     return this.http.get<Paging>(ButterCMSService.baseURL + 'v2/posts/',
       {params: this.getListingParams()})
       .pipe(
@@ -59,6 +74,9 @@ export class ButterCMSService {
   }
 
   blogPost(slug: string): Observable<{ data: any }> {
+    if (!this.okToCallApi) {
+      return of(null);
+    }
     if (!slug) {
       slug = '';
     }

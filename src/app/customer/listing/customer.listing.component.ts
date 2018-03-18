@@ -16,10 +16,10 @@ export class CustomerComponent implements OnInit {
 
   ngOnInit() {
     this.butterCMSService.customers().pipe(
-        take(1)
+      take(1)
     )
-      .subscribe( result => {
-        this.pages = result.data;
+      .subscribe(result => {
+        this.pages = result ? result.data : null;
       });
   }
 }

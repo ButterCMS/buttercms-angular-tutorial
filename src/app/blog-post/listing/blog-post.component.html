@@ -10,7 +10,7 @@
             <div fxLayout="row" fxLayout.xs="column"
                  fxFlex class="content">
               <div class="blocks">
-                <img src="{{post.featured_image}}" alt="featured image" height="64" width="64"/>
+                <img *ngIf="post.featured_image" src="{{post.featured_image}}" alt="featured image" height="64" width="64"/>
               </div>
               <div class="blocks">
                 {{post.title}}

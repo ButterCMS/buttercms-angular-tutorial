@@ -22,8 +22,10 @@ export class FaqComponent implements OnInit {
       take(1)
     )
       .subscribe(result => {
-        this.faq.items = result.data.faq_items;
-        this.faq.title = result.data.faq_headline;
+        if (result) {
+          this.faq.items = result.data.faq_items;
+          this.faq.title = result.data.faq_headline;
+        }
       });
   }
 }

@@ -18,7 +18,7 @@ export class BlogPostComponent implements OnInit {
       take(1)
     )
       .subscribe(result => {
-        this.posts = result.data;
+        this.posts = result ? result.data : null;
       });
   }
 

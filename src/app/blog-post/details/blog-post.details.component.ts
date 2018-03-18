@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute} from '@angular/router';
 import {ButterCMSService} from '../../_services';
@@ -8,7 +8,8 @@ import {map, take} from 'rxjs/operators';
 @Component({
   selector: 'app-blog-post-details',
   templateUrl: './blog-post.details.component.html',
-  styleUrls: ['./blog-post.details.component.scss']
+  styleUrls: ['./blog-post.details.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class BlogPostDetailsComponent implements OnInit {
 
@@ -20,7 +21,8 @@ export class BlogPostDetailsComponent implements OnInit {
   public post = {
     featured_image: null,
     title: null,
-    body: null
+    body: null,
+    author: null
   };
 
   ngOnInit() {
@@ -36,7 +38,7 @@ export class BlogPostDetailsComponent implements OnInit {
           take(1)
         )
           .subscribe(result => {
-            this.post = result.data;
+            this.post = result ? result.data : null;
           });
       });
   }

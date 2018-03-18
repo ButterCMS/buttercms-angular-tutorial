@@ -32,7 +32,7 @@ export class CustomerDetailsComponent implements OnInit {
           take(1)
         )
           .subscribe(result => {
-            this.page = result.data;
+            this.page = result ? result.data : null;
           });
       });
   }
