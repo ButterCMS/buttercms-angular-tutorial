@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FeedComponent } from './feed.component';
+import {RouterTestingModule} from '@angular/router/testing';
+import {AppMaterialModule} from '../_shared';
+import {ButterCMSService} from '../_services';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('FeedComponent', () => {
   let component: FeedComponent;
@@ -8,7 +12,15 @@ describe('FeedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FeedComponent ]
+      declarations: [ FeedComponent ],
+      providers: [
+        ButterCMSService
+      ],
+      imports: [
+        AppMaterialModule,
+        RouterTestingModule,
+        HttpClientTestingModule
+      ]
     })
     .compileComponents();
   }));

@@ -1,6 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BlogPostDetailsComponent } from './blog-post.details.component';
+import {BlogPostDetailsComponent} from './blog-post.details.component';
+import {ButterCMSService} from '../../_services';
+import {AppMaterialModule} from '../../_shared';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('CustomerDetailsComponent', () => {
   let component: BlogPostDetailsComponent;
@@ -8,9 +12,17 @@ describe('CustomerDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BlogPostDetailsComponent ]
+      declarations: [BlogPostDetailsComponent],
+      providers: [
+        ButterCMSService
+      ],
+      imports: [
+        AppMaterialModule,
+        RouterTestingModule,
+        HttpClientTestingModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
