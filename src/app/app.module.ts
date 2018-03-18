@@ -18,6 +18,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {AppRoutingModule} from './app-routing.module';
 import {HomeComponent} from './home/home.component';
 import {ButterCMSService} from './_services';
+import {BlogPostDetailsComponent} from './blog-post/details/blog-post.details.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import {ButterCMSService} from './_services';
     CustomerDetailsComponent,
     FaqComponent,
     BlogPostComponent,
+    BlogPostDetailsComponent,
     MiscComponent,
     HomeComponent
   ],

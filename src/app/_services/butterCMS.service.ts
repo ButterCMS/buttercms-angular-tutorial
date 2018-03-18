@@ -58,6 +58,18 @@ export class ButterCMSService {
         }));
   }
 
+  blogPost(slug: string): Observable<{ data: any }> {
+    if (!slug) {
+      slug = '';
+    }
+    return this.http.get<{ data }>(ButterCMSService.baseURL + `v2/posts/${slug}`,
+      {params: this.getBaseParams()})
+      .pipe(
+        map(response => {
+          return response;
+        }));
+  }
+
   private getFaqParams() {
     return {
       'keys': 'faq_headline,faq_items',

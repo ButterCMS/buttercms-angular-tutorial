@@ -1,0 +1,21 @@
+<mat-card>
+  <div class="container">
+    <div fxLayout="column" class="details">
+      <div class="blocks">
+        <img src="{{post.featured_image}}" alt="Featured image" height="124" width="124"/>
+      </div>
+
+      <h1 class="blocks">
+        {{post.title}}
+      </h1>
+      <h4>
+        {{ post.author?.first_name }} {{ post.author?.last_name }}
+      </h4>
+      <div class="container">
+        <div fxLayout="column" class="summary">
+          <div [innerHTML]="post.body"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-card>
