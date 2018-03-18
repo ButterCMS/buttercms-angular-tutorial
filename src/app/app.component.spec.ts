@@ -1,11 +1,24 @@
-import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import {async, TestBed} from '@angular/core/testing';
+import {AppComponent} from './app.component';
+import {ButterCMSService} from './_services';
+import {AppMaterialModule} from './_shared';
+import {TopnavComponent} from './topnav/topnav.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
+      providers: [
+        ButterCMSService
       ],
+      declarations: [
+        AppComponent,
+        TopnavComponent
+      ],
+      imports: [
+        AppMaterialModule,
+        HttpClientTestingModule
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {

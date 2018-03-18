@@ -1,21 +1,23 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
 import 'hammerjs';
 
-import { AppComponent } from './app.component';
-import { TopnavComponent } from './topnav/topnav.component';
-import { CustomerComponent } from './customer/customer.component';
-import { FaqComponent } from './faq/faq.component';
-import { BlogPostComponent } from './blog-post/blog-post.component';
-import { MiscComponent } from './misc/misc.component';
+import {AppComponent} from './app.component';
+import {TopnavComponent} from './topnav/topnav.component';
+import {CustomerComponent} from './customer/listing/customer.listing.component';
+import {CustomerDetailsComponent} from './customer/details/customer.details.component';
+import {FaqComponent} from './faq/faq.component';
+import {BlogPostComponent} from './blog-post/blog-post.component';
+import {MiscComponent} from './misc/misc.component';
 import {AppMaterialModule} from './_shared';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {AppRoutingModule} from './app-routing.module';
-import { HomeComponent } from './home/home.component';
+import {HomeComponent} from './home/home.component';
+import {ButterCMSService} from './_services';
 
 
 @NgModule({
@@ -23,6 +25,7 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     TopnavComponent,
     CustomerComponent,
+    CustomerDetailsComponent,
     FaqComponent,
     BlogPostComponent,
     MiscComponent,
@@ -37,7 +40,8 @@ import { HomeComponent } from './home/home.component';
     HttpClientModule,
     AppMaterialModule
   ],
-  providers: [],
+  providers: [ButterCMSService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

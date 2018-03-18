@@ -1,7 +1,7 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
-import {TopnavItem, Topnav} from '../_models/index';
+import {Topnav} from '../_models';
 
 @Component({
   selector: 'app-topnav',
@@ -40,25 +40,21 @@ export class TopnavComponent implements OnInit, OnDestroy {
         {
           textContent: 'Customer',
           icon: undefined,
-          activeCondition: '/customer',
           click: () => this.gotoCustomer()
         },
         {
           textContent: 'FAQ',
           icon: undefined,
-          activeCondition: '/faq',
           click: () => this.gotoFaq()
         },
         {
           textContent: 'Blog Posts',
           icon: undefined,
-          activeCondition: '/blog',
           click: () => this.gotoBlogPosts()
         },
         {
           textContent: 'RSS, Atom & Sitemap',
           icon: undefined,
-          activeCondition: '/rss',
           click: () => this.gotoMisc()
         }
       ]
@@ -68,6 +64,7 @@ export class TopnavComponent implements OnInit, OnDestroy {
   gotoHome() {
     this.router.navigate([`/home`]);
   }
+
   gotoCustomer() {
     this.router.navigate([`/customer`]);
   }
