@@ -16,7 +16,7 @@ export class ButterCMSService {
     this.okToCallApi = !(!this.api_token || this.api_token === 'your_api_token');
   }
 
-  customers(): Observable<{ meta: any, data: any[] }> {
+  customers(): Observable<Paging> {
     if (!this.okToCallApi) {
       return of(null);
     }
@@ -81,6 +81,22 @@ export class ButterCMSService {
       slug = '';
     }
     return this.http.get<{ data, meta }>(ButterCMSService.baseURL + `v2/posts/${slug}`,
+      {params: this.getBaseParams()})
+      .pipe(
+        map(response => {
+          return response;
+        }));
+  }
+
+  feeds(type: 'rss'| 'atom'| 'sitemap'): Observable<{ data: any }> {
+    if (!this.okToCallApi) {
+      return of(null);
+    }
+    let feedType = type;
+    if (!type) {
+      feedType = 'rss';
+    }
+    return this.http.get<{ data, meta }>(ButterCMSService.baseURL + `v2/feeds/${feedType}`,
       {params: this.getBaseParams()})
       .pipe(
         map(response => {

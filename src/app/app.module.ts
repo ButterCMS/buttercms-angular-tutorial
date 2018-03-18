@@ -9,7 +9,6 @@ import {CustomerComponent} from './customer/listing/customer.listing.component';
 import {CustomerDetailsComponent} from './customer/details/customer.details.component';
 import {FaqComponent} from './faq/faq.component';
 import {BlogPostComponent} from './blog-post/listing/blog-post.component';
-import {MiscComponent} from './misc/misc.component';
 import {AppMaterialModule} from './_shared';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -19,6 +18,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {HomeComponent} from './home/home.component';
 import {ButterCMSService} from './_services';
 import {BlogPostDetailsComponent} from './blog-post/details/blog-post.details.component';
+import {FeedComponent} from './feed/feed.component';
 
 
 @NgModule({
@@ -30,8 +30,8 @@ import {BlogPostDetailsComponent} from './blog-post/details/blog-post.details.co
     FaqComponent,
     BlogPostComponent,
     BlogPostDetailsComponent,
-    MiscComponent,
-    HomeComponent
+    HomeComponent,
+    FeedComponent
   ],
   imports: [
     AppRoutingModule,
