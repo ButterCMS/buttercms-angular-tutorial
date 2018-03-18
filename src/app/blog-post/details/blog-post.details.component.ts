@@ -19,10 +19,8 @@ export class BlogPostDetailsComponent implements OnInit {
 
   protected slug$: Observable<string>;
   public post = {
-    featured_image: null,
-    title: null,
-    body: null,
-    author: null
+    meta : null,
+    data:  null
   };
 
   ngOnInit() {
@@ -38,7 +36,7 @@ export class BlogPostDetailsComponent implements OnInit {
           take(1)
         )
           .subscribe(result => {
-            this.post = result ? result.data : null;
+            this.post = result;
           });
       });
   }

@@ -73,14 +73,14 @@ export class ButterCMSService {
         }));
   }
 
-  blogPost(slug: string): Observable<{ data: any }> {
+  blogPost(slug: string): Observable<{ data: any, meta: any }> {
     if (!this.okToCallApi) {
       return of(null);
     }
     if (!slug) {
       slug = '';
     }
-    return this.http.get<{ data }>(ButterCMSService.baseURL + `v2/posts/${slug}`,
+    return this.http.get<{ data, meta }>(ButterCMSService.baseURL + `v2/posts/${slug}`,
       {params: this.getBaseParams()})
       .pipe(
         map(response => {
