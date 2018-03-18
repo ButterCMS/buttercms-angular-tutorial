@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {take} from 'rxjs/operators';
+import {ButterCMSService} from '../_services';
 
 @Component({
   selector: 'app-faq',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FaqComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(protected butterCMSService: ButterCMSService) {
   }
 
+  public faq: any = {
+    items: [],
+    title: 'FAQ'
+  };
+
+  ngOnInit() {
+    this.butterCMSService.faq().pipe(
+      take(1)
+    )
+      .subscribe(result => {
+        this.faq.items = result.data.faq_items;
+        this.faq.title = result.data.faq_headline;
+      });
+  }
 }

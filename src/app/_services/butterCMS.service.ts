@@ -14,7 +14,8 @@ export class ButterCMSService {
   }
 
   customers(): Observable<{ meta: any, data: any[] }> {
-    return this.http.get<Paging>(ButterCMSService.baseURL + 'v2/pages/customer_case_study/', {params: this.getParams()})
+    return this.http.get<Paging>(ButterCMSService.baseURL + 'v2/pages/customer_case_study/',
+      {params: this.getBaseParams()})
       .pipe(
         map(response => {
           return {
@@ -28,14 +29,31 @@ export class ButterCMSService {
     if (!slug) {
       slug = '';
     }
-    return this.http.get<Paging>(ButterCMSService.baseURL + `v2/pages/customer_case_study/${slug}`, {params: this.getParams()})
+    return this.http.get<{ data }>(ButterCMSService.baseURL + `v2/pages/customer_case_study/${slug}`,
+      {params: this.getBaseParams()})
       .pipe(
         map(response => {
           return response;
         }));
   }
 
-  private getParams() {
+  faq(): Observable<{ data: any }> {
+    return this.http.get<{ data }>(ButterCMSService.baseURL + `v2/content`,
+      {params: this.getFaqParams()})
+      .pipe(
+        map(response => {
+          return response;
+        }));
+  }
+
+  private getFaqParams() {
+    return {
+      'keys': 'faq_headline,faq_items',
+     ...this.getBaseParams()
+    };
+  }
+
+  private getBaseParams() {
     return {
       'auth_token': this.api_token
     };

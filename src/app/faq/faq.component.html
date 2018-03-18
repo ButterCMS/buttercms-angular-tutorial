@@ -1,7 +1,18 @@
 <mat-card>
-  <mat-card-title class="page-title">FAQ</mat-card-title>
+  <mat-card-title class="page-title">{{faq.title}}</mat-card-title>
   <mat-divider></mat-divider>
-  <mat-card-content class="page-body">Lorem ipsum blah blah blah</mat-card-content>
+  <mat-card-content class="page-body">
+    <mat-card *ngFor="let item of faq.items">
+      <mat-card-content>
+        <h3>
+          {{item.question}}
+        </h3>
+        <div>
+          {{item.answer}}
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
   <mat-divider></mat-divider>
   <mat-card-footer>
     <div class="page-footer">
