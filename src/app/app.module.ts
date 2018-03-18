@@ -8,7 +8,7 @@ import {TopnavComponent} from './topnav/topnav.component';
 import {CustomerComponent} from './customer/listing/customer.listing.component';
 import {CustomerDetailsComponent} from './customer/details/customer.details.component';
 import {FaqComponent} from './faq/faq.component';
-import {BlogPostComponent} from './blog-post/blog-post.component';
+import {BlogPostComponent} from './blog-post/listing/blog-post.component';
 import {MiscComponent} from './misc/misc.component';
 import {AppMaterialModule} from './_shared';
 import {HttpClientModule} from '@angular/common/http';

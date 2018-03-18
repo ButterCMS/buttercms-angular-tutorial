@@ -15,7 +15,7 @@ export class ButterCMSService {
 
   customers(): Observable<{ meta: any, data: any[] }> {
     return this.http.get<Paging>(ButterCMSService.baseURL + 'v2/pages/customer_case_study/',
-      {params: this.getBaseParams()})
+      {params: this.getListingParams()})
       .pipe(
         map(response => {
           return {
@@ -46,10 +46,30 @@ export class ButterCMSService {
         }));
   }
 
+  blogPosts(): Observable<Paging> {
+    return this.http.get<Paging>(ButterCMSService.baseURL + 'v2/posts/',
+      {params: this.getListingParams()})
+      .pipe(
+        map(response => {
+          return {
+            meta: response.meta,
+            data: response.data
+          };
+        }));
+  }
+
   private getFaqParams() {
     return {
       'keys': 'faq_headline,faq_items',
-     ...this.getBaseParams()
+      ...this.getBaseParams()
+    };
+  }
+
+  private getListingParams() {
+    return {
+      'page': '1',
+      'page_size': '10',
+      ... this.getBaseParams()
     };
   }
 

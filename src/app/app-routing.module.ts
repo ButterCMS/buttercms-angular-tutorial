@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {CustomerComponent} from './customer/listing/customer.listing.component';
 import {FaqComponent} from './faq/faq.component';
-import {BlogPostComponent} from './blog-post/blog-post.component';
+import {BlogPostComponent} from './blog-post/listing/blog-post.component';
 import {MiscComponent} from './misc/misc.component';
 import {HomeComponent} from './home/home.component';
 import {CustomerDetailsComponent} from './customer/details/customer.details.component';
