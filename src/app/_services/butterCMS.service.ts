@@ -8,12 +8,15 @@ import {of} from 'rxjs/observable/of';
 @Injectable()
 export class ButterCMSService {
   private static baseURL = 'https://api.buttercms.com/';
-  private api_token = '321478403e868f0fc41f0115731f330ff720ce0b';
-  // private api_token = 'your_api_token';
+  private api_token = 'your_api_token';
   private okToCallApi = false;
 
   constructor(private http: HttpClient) {
     this.okToCallApi = !(!this.api_token || this.api_token === 'your_api_token');
+  }
+
+  isConnected() {
+    return this.okToCallApi;
   }
 
   customers(): Observable<Paging> {
@@ -88,7 +91,7 @@ export class ButterCMSService {
         }));
   }
 
-  feeds(type: 'rss'| 'atom'| 'sitemap'): Observable<{ data: any }> {
+  feeds(type: 'rss' | 'atom' | 'sitemap'): Observable<{ data: any }> {
     if (!this.okToCallApi) {
       return of(null);
     }

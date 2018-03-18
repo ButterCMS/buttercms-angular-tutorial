@@ -28,7 +28,9 @@ export class FeedComponent implements OnInit {
     this.sitemap$ = this.butterCMSService.feeds('sitemap').pipe(
       take(1)
     );
-
   }
 
+  okToShow() {
+    return this.butterCMSService.isConnected();
+  }
 }
