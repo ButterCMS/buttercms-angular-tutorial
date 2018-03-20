@@ -24,13 +24,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-import { AppPaginatorIntl } from '../_shared/app-paginator-intl';
 
 @NgModule({
-    providers: [{
-        provide: MatPaginatorIntl,
-        useClass: AppPaginatorIntl
-    }],
     imports: [
         CdkTableModule,
         MatAutocompleteModule,

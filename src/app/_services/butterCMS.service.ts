@@ -7,8 +7,9 @@ import {of} from 'rxjs/observable/of';
 
 @Injectable()
 export class ButterCMSService {
-  private static baseURL = 'https://api.buttercms.com/';
-  private api_token = 'your_api_token';
+  private static baseURL = 'https://api.buttercms.com/v2/';
+  // private api_token = 'your_api_token';
+  private api_token = '321478403e868f0fc41f0115731f330ff720ce0b';
   private okToCallApi = false;
 
   constructor(private http: HttpClient) {
@@ -23,7 +24,7 @@ export class ButterCMSService {
     if (!this.okToCallApi) {
       return of(null);
     }
-    return this.http.get<Paging>(ButterCMSService.baseURL + 'v2/pages/customer_case_study/',
+    return this.http.get<Paging>(ButterCMSService.baseURL + 'pages/customer_case_study/',
       {params: this.getListingParams()})
       .pipe(
         map(response => {
@@ -41,7 +42,7 @@ export class ButterCMSService {
     if (!slug) {
       slug = '';
     }
-    return this.http.get<{ data }>(ButterCMSService.baseURL + `v2/pages/customer_case_study/${slug}`,
+    return this.http.get<{ data }>(ButterCMSService.baseURL + `pages/customer_case_study/${slug}`,
       {params: this.getBaseParams()})
       .pipe(
         map(response => {
@@ -53,7 +54,7 @@ export class ButterCMSService {
     if (!this.okToCallApi) {
       return of(null);
     }
-    return this.http.get<{ data }>(ButterCMSService.baseURL + `v2/content`,
+    return this.http.get<{ data }>(ButterCMSService.baseURL + `content`,
       {params: this.getFaqParams()})
       .pipe(
         map(response => {
@@ -65,7 +66,7 @@ export class ButterCMSService {
     if (!this.okToCallApi) {
       return of(null);
     }
-    return this.http.get<Paging>(ButterCMSService.baseURL + 'v2/posts/',
+    return this.http.get<Paging>(ButterCMSService.baseURL + 'posts/',
       {params: this.getListingParams()})
       .pipe(
         map(response => {
@@ -83,7 +84,7 @@ export class ButterCMSService {
     if (!slug) {
       slug = '';
     }
-    return this.http.get<{ data, meta }>(ButterCMSService.baseURL + `v2/posts/${slug}`,
+    return this.http.get<{ data, meta }>(ButterCMSService.baseURL + `posts/${slug}`,
       {params: this.getBaseParams()})
       .pipe(
         map(response => {
@@ -99,7 +100,7 @@ export class ButterCMSService {
     if (!type) {
       feedType = 'rss';
     }
-    return this.http.get<{ data, meta }>(ButterCMSService.baseURL + `v2/feeds/${feedType}`,
+    return this.http.get<{ data, meta }>(ButterCMSService.baseURL + `feeds/${feedType}`,
       {params: this.getBaseParams()})
       .pipe(
         map(response => {
