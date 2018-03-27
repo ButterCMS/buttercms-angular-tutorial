@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute} from '@angular/router';
-import {ButterCMSService} from '../../_services';
+import {butterService} from '../../_services';
 import {map, take} from 'rxjs/operators';
 
 
@@ -13,8 +13,7 @@ import {map, take} from 'rxjs/operators';
 })
 export class BlogPostDetailsComponent implements OnInit {
 
-    constructor(protected route: ActivatedRoute,
-                protected butterCMSService: ButterCMSService) {
+    constructor(protected route: ActivatedRoute) {
     }
 
     protected slug$: Observable<string>;
@@ -32,12 +31,13 @@ export class BlogPostDetailsComponent implements OnInit {
         this.slug$.pipe(
             take(1))
             .subscribe(slug => {
-                this.butterCMSService.blogPost(slug).pipe(
-                    take(1)
-                )
-                    .subscribe(result => {
-                        this.post = result;
-                    });
+                butterService.post.retrieve(slug)
+                    .then((res) => {
+                        // console.log(res.data)
+                        this.post = res.data;
+                    }).catch((res) => {
+                    console.log(res);
+                });
             });
     }
 }

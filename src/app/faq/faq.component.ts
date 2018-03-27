@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {take} from 'rxjs/operators';
-import {ButterCMSService} from '../_services';
+import {butterService} from '../_services';
 
 @Component({
     selector: 'app-faq',
@@ -9,7 +8,7 @@ import {ButterCMSService} from '../_services';
 })
 export class FaqComponent implements OnInit {
 
-    constructor(protected butterCMSService: ButterCMSService) {
+    constructor() {
     }
 
     public faq: any = {
@@ -18,14 +17,11 @@ export class FaqComponent implements OnInit {
     };
 
     ngOnInit() {
-        this.butterCMSService.faq().pipe(
-            take(1)
-        )
-            .subscribe(result => {
-                if (result) {
-                    this.faq.items = result.data.faq_items;
-                    this.faq.title = result.data.faq_headline;
-                }
+        butterService.content.retrieve(['faq_headline', 'faq_items'])
+            .then((res) => {
+                console.log(res.data.data);
+                this.faq.title = res.data.data.faq_headline;
+                this.faq.items = res.data.data.faq_items;
             });
     }
 }

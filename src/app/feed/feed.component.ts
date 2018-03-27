@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {take} from 'rxjs/operators';
-import {ButterCMSService} from '../_services';
+import {butterService} from '../_services';
 
 @Component({
     selector: 'app-misc',
@@ -9,28 +7,27 @@ import {ButterCMSService} from '../_services';
     styleUrls: ['./feed.component.scss']
 })
 export class FeedComponent implements OnInit {
-    protected rss$: Observable<any>;
-    protected atom$: Observable<any>;
-    protected sitemap$: Observable<any>;
+    protected rss;
+    protected atom;
+    protected sitemap;
 
-    constructor(protected butterCMSService: ButterCMSService) {
+    constructor() {
     }
 
     ngOnInit() {
-        this.rss$ = this.butterCMSService.feeds('rss').pipe(
-            take(1)
-        );
+        butterService.feed.retrieve('rss').then((res) => {
+            console.log(res.data.data);
+            this.rss = res.data.data;
+        });
 
-        this.atom$ = this.butterCMSService.feeds('atom').pipe(
-            take(1)
-        );
+        butterService.feed.retrieve('atom').then((res) => {
+            console.log(res.data.data);
+            this.atom = res.data.data;
+        });
 
-        this.sitemap$ = this.butterCMSService.feeds('sitemap').pipe(
-            take(1)
-        );
-    }
-
-    okToShow() {
-        return this.butterCMSService.isConnected();
+        butterService.feed.retrieve('sitemap').then((res) => {
+            console.log(res.data.data);
+            this.sitemap = res.data.data;
+        });
     }
 }

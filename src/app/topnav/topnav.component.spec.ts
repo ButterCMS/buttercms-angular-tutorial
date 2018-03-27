@@ -3,7 +3,6 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {TopnavComponent} from './topnav.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppMaterialModule} from '../_shared';
-import {ButterCMSService} from '../_services';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('TopnavComponent', () => {
@@ -13,9 +12,6 @@ describe('TopnavComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [TopnavComponent],
-            providers: [
-                ButterCMSService
-            ],
             imports: [
                 AppMaterialModule,
                 RouterTestingModule,

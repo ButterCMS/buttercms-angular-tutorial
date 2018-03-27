@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ButterCMSService} from '../../_services';
-import {take} from 'rxjs/operators';
+import {butterService} from '../../_services';
 
 @Component({
     selector: 'app-blog-post',
@@ -10,16 +9,17 @@ import {take} from 'rxjs/operators';
 export class BlogPostComponent implements OnInit {
     public posts: any[];
 
-    constructor(private butterCMSService: ButterCMSService) {
+    constructor() {
     }
 
     ngOnInit() {
-        this.butterCMSService.blogPosts().pipe(
-            take(1)
-        )
-            .subscribe(result => {
-                this.posts = result ? result.data : null;
-            });
+        butterService.post.list({
+            page: 1,
+            page_size: 10
+        }).then((res) => {
+            // console.log(res.data)
+            this.posts = res.data.data;
+        });
     }
 
 }

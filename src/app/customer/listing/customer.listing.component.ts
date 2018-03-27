@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {take} from 'rxjs/operators';
-import {ButterCMSService} from '../../_services';
+import {butterService} from '../../_services';
 
 @Component({
     selector: 'app-customer',
@@ -11,15 +10,14 @@ export class CustomerComponent implements OnInit {
 
     public pages: any[];
 
-    constructor(private butterCMSService: ButterCMSService) {
+    constructor() {
     }
 
     ngOnInit() {
-        this.butterCMSService.customers().pipe(
-            take(1)
-        )
-            .subscribe(result => {
-                this.pages = result ? result.data : null;
+        butterService.page.list('customer_case_study')
+            .then((res) => {
+                // console.log(res.data.data) // Check the results in the console
+                this.pages = res.data.data;
             });
     }
 }

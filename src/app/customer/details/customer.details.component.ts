@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute} from '@angular/router';
-import {ButterCMSService} from '../../_services';
+import {butterService} from '../../_services';
 import {map, take} from 'rxjs/operators';
 
 
@@ -12,8 +12,7 @@ import {map, take} from 'rxjs/operators';
 })
 export class CustomerDetailsComponent implements OnInit {
 
-    constructor(protected route: ActivatedRoute,
-                protected butterCMSService: ButterCMSService) {
+    constructor(protected route: ActivatedRoute) {
     }
 
     protected slug$: Observable<string>;
@@ -28,12 +27,12 @@ export class CustomerDetailsComponent implements OnInit {
         this.slug$.pipe(
             take(1))
             .subscribe(slug => {
-                this.butterCMSService.customer(slug).pipe(
-                    take(1)
-                )
-                    .subscribe(result => {
-                        this.page = result ? result.data : null;
-                    });
+                butterService.page.retrieve('customer_case_study', slug)
+                    .then((res) => {
+                        this.page = res.data.data;
+                    }).catch((res) => {
+                    console.log(res);
+                });
             });
     }
 }
