@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {CustomerComponent} from './customer/listing/customer.listing.component';
 import {FaqComponent} from './faq/faq.component';
 import {BlogPostComponent} from './blog-post/listing/blog-post.component';
@@ -9,19 +9,19 @@ import {BlogPostDetailsComponent} from './blog-post/details/blog-post.details.co
 import {FeedComponent} from './feed/feed.component';
 
 const appRoutes: Routes = [
-  {path: 'customer', component: CustomerComponent},
-  {path: 'customer/:slug', component: CustomerDetailsComponent},
-  {path: 'faq', component: FaqComponent},
-  {path: 'blog', component: BlogPostComponent},
-  {path: 'blog/:slug', component: BlogPostDetailsComponent},
-  {path: 'rss', component: FeedComponent},
-  {path: 'home', component: HomeComponent},
-  {path: '**', redirectTo: 'home'}
+    {path: 'customer', component: CustomerComponent},
+    {path: 'customer/:slug', component: CustomerDetailsComponent},
+    {path: 'faq', component: FaqComponent},
+    {path: 'blog', component: BlogPostComponent},
+    {path: 'blog/:slug', component: BlogPostDetailsComponent},
+    {path: 'rss', component: FeedComponent},
+    {path: 'home', component: HomeComponent},
+    {path: '**', redirectTo: 'home'}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(appRoutes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule {
 }

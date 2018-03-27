@@ -7,31 +7,31 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 
 describe('CustomerDetailsComponent', () => {
-  let component: BlogPostDetailsComponent;
-  let fixture: ComponentFixture<BlogPostDetailsComponent>;
+    let component: BlogPostDetailsComponent;
+    let fixture: ComponentFixture<BlogPostDetailsComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [BlogPostDetailsComponent],
-      providers: [
-        ButterCMSService
-      ],
-      imports: [
-        AppMaterialModule,
-        RouterTestingModule,
-        HttpClientTestingModule
-      ]
-    })
-      .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [BlogPostDetailsComponent],
+            providers: [
+                ButterCMSService
+            ],
+            imports: [
+                AppMaterialModule,
+                RouterTestingModule,
+                HttpClientTestingModule
+            ]
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(BlogPostDetailsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(BlogPostDetailsComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

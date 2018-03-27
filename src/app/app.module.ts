@@ -22,28 +22,28 @@ import {FeedComponent} from './feed/feed.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TopnavComponent,
-    CustomerComponent,
-    CustomerDetailsComponent,
-    FaqComponent,
-    BlogPostComponent,
-    BlogPostDetailsComponent,
-    HomeComponent,
-    FeedComponent
-  ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    FlexLayoutModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    AppMaterialModule
-  ],
-  providers: [ButterCMSService],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        TopnavComponent,
+        CustomerComponent,
+        CustomerDetailsComponent,
+        FaqComponent,
+        BlogPostComponent,
+        BlogPostDetailsComponent,
+        HomeComponent,
+        FeedComponent
+    ],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        FlexLayoutModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        AppMaterialModule
+    ],
+    providers: [ButterCMSService],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

@@ -7,125 +7,125 @@ import {of} from 'rxjs/observable/of';
 
 @Injectable()
 export class ButterCMSService {
-  private static baseURL = 'https://api.buttercms.com/v2/';
-  // private api_token = 'your_api_token';
-  private api_token = '321478403e868f0fc41f0115731f330ff720ce0b';
-  private okToCallApi = false;
+    private static baseURL = 'https://api.buttercms.com/v2/';
+    // private api_token = 'your_api_token';
+    private api_token = '321478403e868f0fc41f0115731f330ff720ce0b';
+    private okToCallApi = false;
 
-  constructor(private http: HttpClient) {
-    this.okToCallApi = !(!this.api_token || this.api_token === 'your_api_token');
-  }
-
-  isConnected() {
-    return this.okToCallApi;
-  }
-
-  customers(): Observable<Paging> {
-    if (!this.okToCallApi) {
-      return of(null);
+    constructor(private http: HttpClient) {
+        this.okToCallApi = !(!this.api_token || this.api_token === 'your_api_token');
     }
-    return this.http.get<Paging>(ButterCMSService.baseURL + 'pages/customer_case_study/',
-      {params: this.getListingParams()})
-      .pipe(
-        map(response => {
-          return {
-            meta: response.meta,
-            data: response.data
-          };
-        }));
-  }
 
-  customer(slug: string): Observable<{ data: any }> {
-    if (!this.okToCallApi) {
-      return of(null);
+    isConnected() {
+        return this.okToCallApi;
     }
-    if (!slug) {
-      slug = '';
-    }
-    return this.http.get<{ data }>(ButterCMSService.baseURL + `pages/customer_case_study/${slug}`,
-      {params: this.getBaseParams()})
-      .pipe(
-        map(response => {
-          return response;
-        }));
-  }
 
-  faq(): Observable<{ data: any }> {
-    if (!this.okToCallApi) {
-      return of(null);
+    customers(): Observable<Paging> {
+        if (!this.okToCallApi) {
+            return of(null);
+        }
+        return this.http.get<Paging>(ButterCMSService.baseURL + 'pages/customer_case_study/',
+            {params: this.getListingParams()})
+            .pipe(
+                map(response => {
+                    return {
+                        meta: response.meta,
+                        data: response.data
+                    };
+                }));
     }
-    return this.http.get<{ data }>(ButterCMSService.baseURL + `content`,
-      {params: this.getFaqParams()})
-      .pipe(
-        map(response => {
-          return response;
-        }));
-  }
 
-  blogPosts(): Observable<Paging> {
-    if (!this.okToCallApi) {
-      return of(null);
+    customer(slug: string): Observable<{ data: any }> {
+        if (!this.okToCallApi) {
+            return of(null);
+        }
+        if (!slug) {
+            slug = '';
+        }
+        return this.http.get<{ data }>(ButterCMSService.baseURL + `pages/customer_case_study/${slug}`,
+            {params: this.getBaseParams()})
+            .pipe(
+                map(response => {
+                    return response;
+                }));
     }
-    return this.http.get<Paging>(ButterCMSService.baseURL + 'posts/',
-      {params: this.getListingParams()})
-      .pipe(
-        map(response => {
-          return {
-            meta: response.meta,
-            data: response.data
-          };
-        }));
-  }
 
-  blogPost(slug: string): Observable<{ data: any, meta: any }> {
-    if (!this.okToCallApi) {
-      return of(null);
+    faq(): Observable<{ data: any }> {
+        if (!this.okToCallApi) {
+            return of(null);
+        }
+        return this.http.get<{ data }>(ButterCMSService.baseURL + `content`,
+            {params: this.getFaqParams()})
+            .pipe(
+                map(response => {
+                    return response;
+                }));
     }
-    if (!slug) {
-      slug = '';
+
+    blogPosts(): Observable<Paging> {
+        if (!this.okToCallApi) {
+            return of(null);
+        }
+        return this.http.get<Paging>(ButterCMSService.baseURL + 'posts/',
+            {params: this.getListingParams()})
+            .pipe(
+                map(response => {
+                    return {
+                        meta: response.meta,
+                        data: response.data
+                    };
+                }));
     }
-    return this.http.get<{ data, meta }>(ButterCMSService.baseURL + `posts/${slug}`,
-      {params: this.getBaseParams()})
-      .pipe(
-        map(response => {
-          return response;
-        }));
-  }
 
-  feeds(type: 'rss' | 'atom' | 'sitemap'): Observable<{ data: any }> {
-    if (!this.okToCallApi) {
-      return of(null);
+    blogPost(slug: string): Observable<{ data: any, meta: any }> {
+        if (!this.okToCallApi) {
+            return of(null);
+        }
+        if (!slug) {
+            slug = '';
+        }
+        return this.http.get<{ data, meta }>(ButterCMSService.baseURL + `posts/${slug}`,
+            {params: this.getBaseParams()})
+            .pipe(
+                map(response => {
+                    return response;
+                }));
     }
-    let feedType = type;
-    if (!type) {
-      feedType = 'rss';
+
+    feeds(type: 'rss' | 'atom' | 'sitemap'): Observable<{ data: any }> {
+        if (!this.okToCallApi) {
+            return of(null);
+        }
+        let feedType = type;
+        if (!type) {
+            feedType = 'rss';
+        }
+        return this.http.get<{ data, meta }>(ButterCMSService.baseURL + `feeds/${feedType}`,
+            {params: this.getBaseParams()})
+            .pipe(
+                map(response => {
+                    return response;
+                }));
     }
-    return this.http.get<{ data, meta }>(ButterCMSService.baseURL + `feeds/${feedType}`,
-      {params: this.getBaseParams()})
-      .pipe(
-        map(response => {
-          return response;
-        }));
-  }
 
-  private getFaqParams() {
-    return {
-      'keys': 'faq_headline,faq_items',
-      ...this.getBaseParams()
-    };
-  }
+    private getFaqParams() {
+        return {
+            'keys': 'faq_headline,faq_items',
+            ...this.getBaseParams()
+        };
+    }
 
-  private getListingParams() {
-    return {
-      'page': '1',
-      'page_size': '10',
-      ... this.getBaseParams()
-    };
-  }
+    private getListingParams() {
+        return {
+            'page': '1',
+            'page_size': '10',
+            ... this.getBaseParams()
+        };
+    }
 
-  private getBaseParams() {
-    return {
-      'auth_token': this.api_token
-    };
-  }
+    private getBaseParams() {
+        return {
+            'auth_token': this.api_token
+        };
+    }
 }

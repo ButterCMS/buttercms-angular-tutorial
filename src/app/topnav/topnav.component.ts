@@ -4,81 +4,81 @@ import {Subscription} from 'rxjs/Subscription';
 import {Topnav} from '../_models';
 
 @Component({
-  selector: 'app-topnav',
-  templateUrl: './topnav.component.html',
-  styleUrls: ['./topnav.component.scss']
+    selector: 'app-topnav',
+    templateUrl: './topnav.component.html',
+    styleUrls: ['./topnav.component.scss']
 })
 export class TopnavComponent implements OnInit, OnDestroy {
 
-  constructor(private router: Router) {
-  }
-
-  topnav: Topnav;
-  private subscription: Subscription;
-
-  ngOnInit() {
-    this.createTopNavItems();
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+    constructor(private router: Router) {
     }
-  }
 
-  private createTopNavItems() {
-    this.topnav = {
-      home: [
-        {
-          textContent: 'Home',
-          icon: 'home',
-          svg: true,
-          click: () => this.gotoHome()
+    topnav: Topnav;
+    private subscription: Subscription;
+
+    ngOnInit() {
+        this.createTopNavItems();
+    }
+
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
         }
-      ],
-      commonItems: [
-        {
-          textContent: 'Customer',
-          icon: undefined,
-          click: () => this.gotoCustomer()
-        },
-        {
-          textContent: 'FAQ',
-          icon: undefined,
-          click: () => this.gotoFaq()
-        },
-        {
-          textContent: 'Blog Posts',
-          icon: undefined,
-          click: () => this.gotoBlogPosts()
-        },
-        {
-          textContent: 'RSS, Atom & Sitemap',
-          icon: undefined,
-          click: () => this.gotoMisc()
-        }
-      ]
-    };
-  }
+    }
 
-  gotoHome() {
-    this.router.navigate([`/home`]);
-  }
+    private createTopNavItems() {
+        this.topnav = {
+            home: [
+                {
+                    textContent: 'Home',
+                    icon: 'home',
+                    svg: true,
+                    click: () => this.gotoHome()
+                }
+            ],
+            commonItems: [
+                {
+                    textContent: 'Customer',
+                    icon: undefined,
+                    click: () => this.gotoCustomer()
+                },
+                {
+                    textContent: 'FAQ',
+                    icon: undefined,
+                    click: () => this.gotoFaq()
+                },
+                {
+                    textContent: 'Blog Posts',
+                    icon: undefined,
+                    click: () => this.gotoBlogPosts()
+                },
+                {
+                    textContent: 'RSS, Atom & Sitemap',
+                    icon: undefined,
+                    click: () => this.gotoMisc()
+                }
+            ]
+        };
+    }
 
-  gotoCustomer() {
-    this.router.navigate([`/customer`]);
-  }
+    gotoHome() {
+        this.router.navigate([`/home`]);
+    }
 
-  gotoFaq() {
-    this.router.navigate([`/faq`]);
-  }
+    gotoCustomer() {
+        this.router.navigate([`/customer`]);
+    }
 
-  gotoBlogPosts() {
-    this.router.navigate([`/blog`]);
-  }
+    gotoFaq() {
+        this.router.navigate([`/faq`]);
+    }
 
-  gotoMisc() {
-    this.router.navigate([`/rss`]);
-  }
+    gotoBlogPosts() {
+        this.router.navigate([`/blog`]);
+    }
+
+    gotoMisc() {
+        this.router.navigate([`/rss`]);
+    }
 }
 
