@@ -17,7 +17,6 @@ export class BlogPostComponent implements OnInit {
             page: 1,
             page_size: 10
         }).then((res) => {
-            // console.log(res.data)
             this.posts = res.data.data;
         });
     }

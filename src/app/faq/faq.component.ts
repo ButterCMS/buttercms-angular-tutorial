@@ -19,7 +19,6 @@ export class FaqComponent implements OnInit {
     ngOnInit() {
         butterService.content.retrieve(['faq_headline', 'faq_items'])
             .then((res) => {
-                console.log(res.data.data);
                 this.faq.title = res.data.data.faq_headline;
                 this.faq.items = res.data.data.faq_items;
             });

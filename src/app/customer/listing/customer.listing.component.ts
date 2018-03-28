@@ -16,7 +16,6 @@ export class CustomerComponent implements OnInit {
     ngOnInit() {
         butterService.page.list('customer_case_study')
             .then((res) => {
-                // console.log(res.data.data) // Check the results in the console
                 this.pages = res.data.data;
             });
     }

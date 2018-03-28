@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {Butter} from 'buttercms';
 
 import 'hammerjs';
 
@@ -20,6 +19,7 @@ import {HomeComponent} from './home/home.component';
 
 import {BlogPostDetailsComponent} from './blog-post/details/blog-post.details.component';
 import {FeedComponent} from './feed/feed.component';
+import { HelloYouComponent } from './hello-you/hello-you.component';
 
 
 @NgModule({
@@ -32,7 +32,8 @@ import {FeedComponent} from './feed/feed.component';
         BlogPostComponent,
         BlogPostDetailsComponent,
         HomeComponent,
-        FeedComponent
+        FeedComponent,
+        HelloYouComponent
     ],
     imports: [
         AppRoutingModule,

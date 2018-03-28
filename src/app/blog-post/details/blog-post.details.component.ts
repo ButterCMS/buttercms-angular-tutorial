@@ -33,7 +33,6 @@ export class BlogPostDetailsComponent implements OnInit {
             .subscribe(slug => {
                 butterService.post.retrieve(slug)
                     .then((res) => {
-                        // console.log(res.data)
                         this.post = res.data;
                     }).catch((res) => {
                     console.log(res);

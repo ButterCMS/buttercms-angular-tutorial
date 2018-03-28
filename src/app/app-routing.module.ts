@@ -7,6 +7,7 @@ import {HomeComponent} from './home/home.component';
 import {CustomerDetailsComponent} from './customer/details/customer.details.component';
 import {BlogPostDetailsComponent} from './blog-post/details/blog-post.details.component';
 import {FeedComponent} from './feed/feed.component';
+import {HelloYouComponent} from './hello-you/hello-you.component';
 
 const appRoutes: Routes = [
     {path: 'customer', component: CustomerComponent},
@@ -15,6 +16,7 @@ const appRoutes: Routes = [
     {path: 'blog', component: BlogPostComponent},
     {path: 'blog/:slug', component: BlogPostDetailsComponent},
     {path: 'rss', component: FeedComponent},
+    {path: 'hello-you', component: HelloYouComponent},
     {path: 'home', component: HomeComponent},
     {path: '**', redirectTo: 'home'}
 ];
