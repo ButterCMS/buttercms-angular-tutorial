@@ -22,7 +22,7 @@ npm install --save @angular/animations
 
 Install ButterCMS
 `npm i -S buttercms`
-The source code is [available on Github](https://github.com/ButterCMS/buttercms-vue-tutorial)
+The source code is [available on Github](https://github.com/ButterCMS/buttercms-angular-tutorial)
 
 ## Quickstart
 Open the project in your code editor of choice.
