@@ -9,9 +9,11 @@ npm install -g @angular/cli
 Setup a new Angular project using Angular cli
 
 ```
-ng new hello-buttercms-project
+ng new hello-buttercms-project --style=scss
 cd hello-buttercms-project
 ```
+
+By default, angular-cli uses css style, so adding the `--style=scss` flag tells angular cli to use scss instead.
 
 Install Angular Material and Angular Material related package
 
@@ -120,7 +122,7 @@ Let's get to the code.
 
 ### Create new project
 ```
-ng new buttercms-project
+ng new buttercms-project --style=scss
 cd buttercms-project
 npm install --save @angular/material @angular/cdk
 npm install --save @angular/animations
