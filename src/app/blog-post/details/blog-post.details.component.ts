@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute} from '@angular/router';
-import {butterService} from '../../_services';
+import {butterService} from '../../services';
 import {map, take} from 'rxjs/operators';
 
 
