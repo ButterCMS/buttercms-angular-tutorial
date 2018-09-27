@@ -133,7 +133,7 @@ Your localhost:4200 should be ready to serve your Angular page.
 
 ### Using your editor create your typescript file to export ButterCMS service
 
-Under src/app create a directory called `ices`.  Create a file called `butterCMS.service.ts`.
+Under src/app create a directory called `services`.  Create a file called `butterCMS.service.ts`.
 
 ```
  import * as Butter from 'buttercms';
