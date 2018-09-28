@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
-import {Topnav} from '../_models';
+import {Topnav} from '../models';
 
 @Component({
     selector: 'app-topnav',

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {butterService} from '../../_services';
+import {butterService} from '../../services';
 
 @Component({
     selector: 'app-customer',

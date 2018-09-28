@@ -9,7 +9,7 @@ import {CustomerComponent} from './customer/listing/customer.listing.component';
 import {CustomerDetailsComponent} from './customer/details/customer.details.component';
 import {FaqComponent} from './faq/faq.component';
 import {BlogPostComponent} from './blog-post/listing/blog-post.component';
-import {AppMaterialModule} from './_shared';
+import {AppMaterialModule} from './shared';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
