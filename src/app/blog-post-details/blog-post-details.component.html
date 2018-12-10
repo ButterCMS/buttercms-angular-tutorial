@@ -1,0 +1,20 @@
+<mat-card>
+  <div class="container">
+    <div fxLayout="column" class="blog-details">
+      <div class="container">
+        <div fxLayout="row">
+          <h1 class="blocks">
+            {{post.data?.title}}
+          </h1>
+          <div *ngIf="post.meta?.previous_post"><a [routerLink]="post.meta.previous_post"><</a></div>
+          <div *ngIf="post.meta?.next_post"><a [routerLink]="post.meta.next_post">></a></div>
+        </div>
+        <h4>
+          {{ post.data?.author?.first_name }} {{ post.data?.author?.last_name }}
+        </h4>
+        <div class="post-body" [innerHTML]="post.data?.body"></div>
+      </div>
+    </div>
+  </div>
+</mat-card>
+

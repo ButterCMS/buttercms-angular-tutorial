@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row class="equal_column_spacer">
         <div>
-            <button mat-menu-item (click)="item.click()" *ngFor="let item of topnav.home">
+            <button mat-menu-item (click)="item.click()" *ngFor="let item of topNav.home">
                 <mat-icon
                         *ngIf="item.icon">
                     {{item.icon}}
@@ -10,7 +10,7 @@
         </div>
         <nav>
             <ul>
-                <li *ngFor="let item of topnav.commonItems">
+                <li *ngFor="let item of topNav.commonItems">
                     <button mat-button (click)="item.click()">
                         <mat-icon
                                 *ngIf="item.icon">

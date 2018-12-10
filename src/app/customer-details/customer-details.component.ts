@@ -1,22 +1,22 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
-import {butterService} from '../../services';
+import {butterService} from '../services';
 import {map, take} from 'rxjs/operators';
 
 
 @Component({
     selector: 'app-customer-details',
-    templateUrl: './customer.details.component.html',
-    styleUrls: ['./customer.details.component.scss']
+    templateUrl: './customer-details.component.html',
+    styleUrls: ['./customer-details.component.scss']
 })
 export class CustomerDetailsComponent implements OnInit {
 
+    public page: any;
+    protected slug$: Observable<string>;
+
     constructor(protected route: ActivatedRoute) {
     }
-
-    protected slug$: Observable<string>;
-    public page: any;
 
     ngOnInit() {
         this.slug$ = this.route.paramMap

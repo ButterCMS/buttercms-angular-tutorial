@@ -1,14 +1,14 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
-import {butterService} from '../../services';
+import {butterService} from '../services';
 import {map, take} from 'rxjs/operators';
 
 
 @Component({
     selector: 'app-blog-post-details',
-    templateUrl: './blog-post.details.component.html',
-    styleUrls: ['./blog-post.details.component.scss'],
+    templateUrl: './blog-post-details.component.html',
+    styleUrls: ['./blog-post-details.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class BlogPostDetailsComponent implements OnInit {

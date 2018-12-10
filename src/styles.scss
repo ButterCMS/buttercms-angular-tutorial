@@ -2,23 +2,23 @@
 @import '~@angular/material/theming';
 
 .equal_column_spacer {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .equal_column_center {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .page-title, .page-body {
-    padding: 10px 5px;
+  padding: 10px 5px;
 }
 
 .page-footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
 }
 

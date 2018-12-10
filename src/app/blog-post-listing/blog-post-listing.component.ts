@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {butterService} from '../../services';
+import {butterService} from '../services';
 
 @Component({
-    selector: 'app-blog-post',
-    templateUrl: './blog-post.component.html',
-    styleUrls: ['./blog-post.component.scss']
+    selector: 'app-blog-post-listing',
+    templateUrl: './blog-post-listing.component.html',
+    styleUrls: ['./blog-post-listing.component.scss']
 })
-export class BlogPostComponent implements OnInit {
+export class BlogPostListingComponent implements OnInit {
     public posts: any[];
 
     constructor() {
