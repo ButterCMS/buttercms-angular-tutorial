@@ -248,7 +248,7 @@ ng g c customer-listing --spec false
 ng g c faq --spec false 
 ng g c feed --spec false 
 ng g c home --spec false
-ng g c topnav --spec false
+ng g c topav --spec false
 ```
 
 You will also need a `shared` folder that contains a list of Angular Material modules
