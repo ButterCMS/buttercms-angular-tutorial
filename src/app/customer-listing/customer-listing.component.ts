@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {butterService} from '../../services';
+import {butterService} from '../services';
 
 @Component({
     selector: 'app-customer',
-    templateUrl: './customer.listing.component.html',
-    styleUrls: ['./customer.listing.component.scss']
+    templateUrl: './customer-listing.component.html',
+    styleUrls: ['./customer-listing.component.scss']
 })
-export class CustomerComponent implements OnInit {
+export class CustomerListingComponent implements OnInit {
 
     public pages: any[];
 

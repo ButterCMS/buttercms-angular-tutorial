@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-title class="page-title">Customers</mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-card-content class="page-body">
+    <mat-card *ngFor="let page of pages">
+      <mat-card-title>
+        <div class="container">
+          <a [routerLink]="[page.slug]">
+            <div fxLayout="row" fxLayout.xs="column"
+                 fxFlex class="content">
+              <div class="blocks">
+                <img src="{{page.fields.customer_logo}}" alt="{{page.fields.seotitle}}" height="64"
+                     width="64"/>
+              </div>
+              <div class="blocks">
+                {{page.fields.headline}}
+              </div>
+            </div>
+          </a>
+        </div>
+      </mat-card-title>
+    </mat-card>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-footer>
+    <div class="page-footer">
+      <mat-icon>whatshot</mat-icon>
+    </div>
+  </mat-card-footer>
+</mat-card>
+
+

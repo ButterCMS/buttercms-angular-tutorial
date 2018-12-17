@@ -1,0 +1,16 @@
+<mat-card>
+  <div class="container">
+    <div fxLayout="column" class="details">
+      <div class="blocks">
+        <img src="{{page?.fields?.customer_logo}}" alt="" height="124" width="124"/>
+      </div>
+
+      <h1 class="blocks">
+        {{page?.fields?.headline}}
+      </h1>
+      <h3 class="is-size-3">Testimonials</h3>
+      <div [innerHTML]="page?.fields?.testimonial"></div>
+      <div [innerHTML]="page?.fields?.body"></div>
+    </div>
+  </div>
+</mat-card>

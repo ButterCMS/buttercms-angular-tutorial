@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {Topnav} from '../models';
 
 @Component({
@@ -13,7 +13,7 @@ export class TopnavComponent implements OnInit, OnDestroy {
     constructor(private router: Router) {
     }
 
-    topnav: Topnav;
+    topNav: Topnav;
     private subscription: Subscription;
 
     ngOnInit() {
@@ -27,7 +27,7 @@ export class TopnavComponent implements OnInit, OnDestroy {
     }
 
     private createTopNavItems() {
-        this.topnav = {
+        this.topNav = {
             home: [
                 {
                     textContent: 'Home',

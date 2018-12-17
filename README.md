@@ -5,21 +5,40 @@ Install Angular cli
 
 npm install -g @angular/cli
 
+ng version would result in :
+
+```
+Package                      Version
+------------------------------------------------------
+@angular-devkit/architect    0.11.2
+@angular-devkit/core         7.1.2
+@angular-devkit/schematics   7.1.2
+@schematics/angular          7.1.2
+@schematics/update           0.11.2
+rxjs                         6.3.3
+typescript                   3.1.6
+```
 
 Setup a new Angular project using Angular cli
 
 ```
-ng new hello-buttercms-project --style=scss
-cd hello-buttercms-project
+ng new buttercms-angular-seven 
 ```
 
-By default, angular-cli uses css style, so adding the `--style=scss` flag tells angular cli to use scss instead.
+In angular cli prompt, say `YES` to Angular Routing and choose `SCSS` using the arrow keys for the stylesheet format
 
-Install Angular Material and Angular Material related package
+change directory to the newly created angular application
+
+```
+cd buttercms-angular-seven
+```
+
+
+Install Angular Material and Angular Material related packages
 
 ```
 npm install --save @angular/material @angular/cdk
-npm install --save @angular/animations
+npm install -S @angular/flex-layout
 ```
 
 Install ButterCMS
@@ -41,7 +60,16 @@ export const butterService = Butter('your_api_token');
 
 We'll import this file into any component we want to use ButterCMS.
 
-For a Quickstart go to src/app/hello-you/hello-you.component.ts and import `butterService`
+For a Quickstart create a component in angular to load the sample headlines and posts from buttercms
+
+from your `buttercms-angular-seven` directory type:
+
+```
+ng g c hello-you -s true -t true --spec false 
+```
+
+This will create a component called `hello-you` with inline-style and inline-template with no spec file.
+angular cli will also include this component in your app.module.ts
 
 ```
 import {butterService} from '../services';
@@ -50,25 +78,24 @@ import {butterService} from '../services';
 Inside HelloYouComponent create methods:
 
 ```
-
-  fetchPosts() {
-    butter.post.list({
-        page: 1,
-        page_size: 10
-      })
-      .then((res) => {
-        console.log('Content from ButterCMS')
-        console.log(res)
-      })
-  }
-}
+    private fetchPosts() {
+        butterService.post.list({
+                page: 1,
+                page_size: 10
+            })
+            .then((res) => {
+                console.log('Content from ButterCMS');
+                console.log(res);
+                this.posts = res.data;
+            });
+    }
 ```
 
 Now call this method when the component is loaded by adding it to the `OnInit` lifecycle hook:
 ```
-ngOnInit() {
+    ngOnInit() {
       this.fetchPosts();
-  }
+    }
 ```
 
 This API request fetches our blog posts. Your account comes with one example post which you'll see in the response.
@@ -76,13 +103,14 @@ This API request fetches our blog posts. Your account comes with one example pos
 Next, create another method to retrieve the Homepage Headline Content Field:
 
 ```
-fetchHeadline() {
-  butter.content.retrieve(['homepage_headline'])
-    .then((res) => {
-      console.log('Headline from ButterCMS')
-      console.log(res)
-    })
-},
+    private fetchHeadline() {
+        butterService.content.retrieve(['homepage_headline'])
+            .then((res) => {
+                console.log('Headline from ButterCMS');
+                console.log(res);
+                this.headlines = res.data;
+            });
+    }
 ```
 
 Add this method to the `OnInit` lifecycle hook.
@@ -95,6 +123,8 @@ Add this method to the `OnInit` lifecycle hook.
 ```
 
 This API request fetches homepage headline content. You can setup your own custom content fields to manage any content kind of content you need.
+
+Hook this component up in Angular by adding `<app-hello-you></app-hello-you> to app.component.html and see it in action!
 
 # Pages
 ## Integrate your app
@@ -115,57 +145,135 @@ With our page defined, the ButterCMS API will return it in JSON format like this
 }
 ```
 
+Here's how the whole hello-you.component.ts will look like:
+
+```
+import {Component, OnInit} from '@angular/core';
+
+import {butterService} from '../services';
+
+@Component({
+    selector: 'app-hello-you',
+    template: `
+        <h1>Hello-You</h1>
+        <p>
+            Headline:
+            {{headlines?.data?.homepage_headline}}
+        </p>
+        <p>
+            Sample Post:
+            {{posts? posts.data[0]?.url : 'no posts'}}
+        </p>
+    `,
+    styles: []
+})
+export class HelloYouComponent implements OnInit {
+
+    posts;
+    headlines;
+
+    constructor() {
+    }
+
+    ngOnInit() {
+        this.fetchPosts();
+        this.fetchHeadline();
+    }
+
+    private fetchHeadline() {
+        butterService.content.retrieve(['homepage_headline'])
+            .then((res) => {
+                console.log('Headline from ButterCMS');
+                console.log(res);
+                this.headlines = res.data;
+            });
+    }
+
+    private fetchPosts() {
+        butterService.post.list({
+                page: 1,
+                page_size: 10
+            })
+            .then((res) => {
+                console.log('Content from ButterCMS');
+                console.log(res);
+                this.posts = res.data;
+            });
+    }
+}
+
+```
+
 This guide uses the [Angular](https://angular.io/) framework and  [Angular cli](https://cli.angular.io/) to generate all our components and package our application.
 We are using [Angular Material](https://material.angular.io/) for our look and feel, but feel free to use any other.
 
 Let's get to the code.
 
-### Create new project
-```
-ng new buttercms-project --style=scss
-cd buttercms-project
-npm install --save @angular/material @angular/cdk
-npm install --save @angular/animations
-npm install -S buttercms
-ng serve
-```
+###
+Now we will build on top of what we have created so far.
+
+In a terminal run
+
+`ng serve`
+
 Your localhost:4200 should be ready to serve your Angular page.
 
-### Using your editor create your typescript file to export ButterCMS service
 
-Under src/app create a directory called `services`.  Create a file called `butterCMS.service.ts`.
+Under src/app look at the file called app-routing.module.ts
+
+Initially it looks like this :
 
 ```
- import * as Butter from 'buttercms';
-
- export const butterService = Butter('your_api_token'); // where your_api_token is your ButterCMS token
+ import { NgModule } from '@angular/core';
+ import { Routes, RouterModule } from '@angular/router';
  
-```
-
-
+ const routes: Routes = [];
+ 
+ @NgModule({
+   imports: [RouterModule.forRoot(routes)],
+   exports: [RouterModule]
+ })
+ export class AppRoutingModule { }
+ ```
 
 ### Update the routes in your app to route to the specified components.
-These components are generated by angular cli using `ng g component <my-new-component>`
+These components are generated by angular cli using `ng g c <my-new-component>`
+Here are 8 components we will need to create:
 
-Under src/app create a file called app-routing.module.ts
+```
+ng g c blog-post-details --spec false 
+ng g c blog-post-listing --spec false 
+ng g c customer-details --spec false 
+ng g c customer-listing --spec false 
+ng g c faq --spec false 
+ng g c feed --spec false 
+ng g c home --spec false
+ng g c topav --spec false
+```
 
+You will also need a `shared` folder that contains a list of Angular Material modules
+and a `model` folder, that will contain our topNav models.
+
+Since we are using Angular Material, you will need to provide a `themes` folder that contains what theme we want to use for Angular Material.
+
+Here is how your `app-routing.module.ts` should look like:
 ```
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {CustomerComponent} from './customer/listing/customer.listing.component';
 import {FaqComponent} from './faq/faq.component';
-import {BlogPostComponent} from './blog-post/listing/blog-post.component';
 import {HomeComponent} from './home/home.component';
-import {CustomerDetailsComponent} from './customer/details/customer.details.component';
-import {BlogPostDetailsComponent} from './blog-post/details/blog-post.details.component';
 import {FeedComponent} from './feed/feed.component';
 import {HelloYouComponent} from './hello-you/hello-you.component';
+import {BlogPostListingComponent} from './blog-post-listing/blog-post-listing.component';
+import {CustomerListingComponent} from './customer-listing/customer-listing.component';
+import {CustomerDetailsComponent} from './customer-details/customer-details.component';
+import {BlogPostDetailsComponent} from './blog-post-details/blog-post-details.component';
 
 const appRoutes: Routes = [
-    {path: 'customer', component: CustomerComponent},
+    {path: 'customer', component: CustomerListingComponent},
     {path: 'customer/:slug', component: CustomerDetailsComponent},
     {path: 'faq', component: FaqComponent},
-    {path: 'blog', component: BlogPostComponent},
+    {path: 'blog', component: BlogPostListingComponent},
     {path: 'blog/:slug', component: BlogPostDetailsComponent},
     {path: 'rss', component: FeedComponent},
     {path: 'hello-you', component: HelloYouComponent},
@@ -180,29 +288,28 @@ const appRoutes: Routes = [
 export class AppRoutingModule {
 }
 
+
 ```
 
 
 ### Setup the Customers Page to list all our customers.
-Under apps/customer type `ng g component listing`
+We've already created all the components we need so far.
 
-`apps/customer/listing/customer.listing.component.ts`
-
-#### In that file
+#### In Customer listing page, we should
 1. Import butterService
 2. In OnInit hook, use butterService to get the list of customers
 3. Store results in `pages` variable and markup (html) will be updated with the data
 
 ```
 import {Component, OnInit} from '@angular/core';
-import {butterService} from '../../services';
+import {butterService} from '../services';
 
 @Component({
     selector: 'app-customer',
-    templateUrl: './customer.listing.component.html',
-    styleUrls: ['./customer.listing.component.scss']
+    templateUrl: './customer-listing.component.html',
+    styleUrls: ['./customer-listing.component.scss']
 })
-export class CustomerComponent implements OnInit {
+export class CustomerListingComponent implements OnInit {
 
     public pages: any[];
 
@@ -218,7 +325,7 @@ export class CustomerComponent implements OnInit {
 }
 ```
 
-#### Display the results in customer.listing.component.html
+#### Display the results in customer-listing.component.html
 ```
 <mat-card>
     <mat-card-title class="page-title">Customers</mat-card-title>
@@ -254,9 +361,7 @@ export class CustomerComponent implements OnInit {
 
 
 ### Setup the Customer Page to view single page
-Under apps/customer type `ng g component details`
-
-`apps/customer/details/customer.details.component.ts`
+In the customer details component
 
 #### Create customer page
 1. Import butterService
@@ -266,24 +371,24 @@ Under apps/customer type `ng g component details`
 
 ```
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
-import {butterService} from '../../services';
+import {butterService} from '../services';
 import {map, take} from 'rxjs/operators';
 
 
 @Component({
     selector: 'app-customer-details',
-    templateUrl: './customer.details.component.html',
-    styleUrls: ['./customer.details.component.scss']
+    templateUrl: './customer-details.component.html',
+    styleUrls: ['./customer-details.component.scss']
 })
 export class CustomerDetailsComponent implements OnInit {
 
+    public page: any;
+    protected slug$: Observable<string>;
+
     constructor(protected route: ActivatedRoute) {
     }
-
-    protected slug$: Observable<string>;
-    public page: any;
 
     ngOnInit() {
         this.slug$ = this.route.paramMap
@@ -303,9 +408,10 @@ export class CustomerDetailsComponent implements OnInit {
             });
     }
 }
+
 ```
 
-#### Display the result in customer.details.component.html
+#### Display the result in customer-details.component.html
 ```
 <mat-card>
     <div class="container">
@@ -331,9 +437,7 @@ We can now navigate to the Customer Page via the list of all Customer Pages or d
 ## Integrate with your app
 ### Create FAQ Component
 
-Under apps type `ng g component faq`
-
-`apps/faq/faq.component.ts`
+In the faq component we need to setup the onInit hook.
 
 #### Setup onInit hook to load FAQ
 
@@ -406,9 +510,7 @@ See our API reference for additional options such as filtering by category or au
 
 ### Setup the Blog page to list all our posts.
 
-Under apps/blog-post type `ng g component listing`
-
-`apps/blog-post/listing/blog-post.listing.component.ts`
+In the blog-post-listing component, import butterService and load all posts using the onInit hook.
 
 #### Update component to get all posts
 1. import butterService
@@ -416,14 +518,14 @@ Under apps/blog-post type `ng g component listing`
 
 ```
 import {Component, OnInit} from '@angular/core';
-import {butterService} from '../../services';
+import {butterService} from '../services';
 
 @Component({
-    selector: 'app-blog-post',
-    templateUrl: './blog-post.component.html',
-    styleUrls: ['./blog-post.component.scss']
+    selector: 'app-blog-post-listing',
+    templateUrl: './blog-post-listing.component.html',
+    styleUrls: ['./blog-post-listing.component.scss']
 })
-export class BlogPostComponent implements OnInit {
+export class BlogPostListingComponent implements OnInit {
     public posts: any[];
 
     constructor() {
@@ -434,11 +536,9 @@ export class BlogPostComponent implements OnInit {
             page: 1,
             page_size: 10
         }).then((res) => {
-            // console.log(res.data)
             this.posts = res.data.data;
         });
     }
-
 }
 
 ```
@@ -486,9 +586,9 @@ export class BlogPostComponent implements OnInit {
 ```
 
 ### Setup the Blog Post page to list a single post.
-Under apps/blog-post type `ng g component details`
+blog-post-details will show a single post.
 
-`apps/blog-post/details/blog-post.details.component.ts`
+`apps/blog-post-details.component.ts`
 
 #### To show to the single post
 1. Import butterService
@@ -497,16 +597,16 @@ Under apps/blog-post type `ng g component details`
 
 ```
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
-import {butterService} from '../../services';
+import {butterService} from '../services';
 import {map, take} from 'rxjs/operators';
 
 
 @Component({
     selector: 'app-blog-post-details',
-    templateUrl: './blog-post.details.component.html',
-    styleUrls: ['./blog-post.details.component.scss'],
+    templateUrl: './blog-post-details.component.html',
+    styleUrls: ['./blog-post-details.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class BlogPostDetailsComponent implements OnInit {
@@ -538,7 +638,6 @@ export class BlogPostDetailsComponent implements OnInit {
             });
     }
 }
-
 ```
 
 #### Display the results
@@ -566,7 +665,7 @@ export class BlogPostDetailsComponent implements OnInit {
 
 Now our app is pulling all blog posts and we can navigate to individual posts.
 
-However, our next/previous post buttons are not working.
+However, our next/previous post buttons are not working. You should try showing the next/previous posts after this tutorial.
 
 
 
