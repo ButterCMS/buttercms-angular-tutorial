@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "buttercms-angular-seven": {
+    "buttercms-angular-nine": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/buttercms-angular-seven",
+            "outputPath": "dist/buttercms-angular-nine",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -61,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "buttercms-angular-seven:build"
+            "browserTarget": "buttercms-angular-nine:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "buttercms-angular-seven:build:production"
+              "browserTarget": "buttercms-angular-nine:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "buttercms-angular-seven:build"
+            "browserTarget": "buttercms-angular-nine:build"
           }
         },
         "test": {
@@ -106,7 +106,7 @@
         }
       }
     },
-    "buttercms-angular-seven-e2e": {
+    "buttercms-angular-nine-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -115,11 +115,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "buttercms-angular-seven:serve"
+            "devServerTarget": "buttercms-angular-nine:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "buttercms-angular-seven:serve:production"
+              "devServerTarget": "buttercms-angular-nine:serve:production"
             }
           }
         },
@@ -135,5 +135,5 @@
       }
     }
   },
-  "defaultProject": "buttercms-angular-seven"
+  "defaultProject": "buttercms-angular-nine"
 }
