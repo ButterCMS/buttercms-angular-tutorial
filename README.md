@@ -1,9 +1,7 @@
 # Setup
 
 ## Important Notice
-This project was created as an example use case of ButterCMS and Angular, and will not be actively maintained.
-
-If you’re interested in exploring the best, most up-to-date way to integrate Butter into Angular, you can check out the following resources:
+This project was created as an example use case of ButterCMS and Angular, and will not be actively maintained. It has been archived, but if you’re interested in exploring the best, most up-to-date way to integrate Butter into Angular, you can check out the following resources:
 
 ### Starter Projects
 
